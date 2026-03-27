@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
 import Layout from "./components/layout/Layout";
 import { getDiaries, saveDiary } from "./lib/storage";
@@ -31,7 +31,7 @@ function SeedLoader({ children }: { children: React.ReactNode }) {
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <SeedLoader>
         <Layout>
           <Routes>
@@ -53,6 +53,6 @@ export default function App() {
           </Routes>
         </Layout>
       </SeedLoader>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
