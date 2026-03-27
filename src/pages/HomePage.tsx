@@ -1,128 +1,119 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import BrutalButton from "../components/ui/BrutalButton";
-import BrutalCard from "../components/ui/BrutalCard";
-import InfiniteMarquee from "../components/ui/InfiniteMarquee";
+import Accordion from "../components/ui/Accordion";
 import DiaryCard from "../components/diary/DiaryCard";
-import CountUp from "../components/ui/CountUp";
 import { getDiaries } from "../lib/storage";
-import { calcTotalSpent, calcRationalIndex, calcSavingsJar } from "../lib/stats";
 
-const SLOGANS = [
-  "🌿 理性消费",
-  "💸 拒绝冲动",
-  "🧠 用脑购物",
-  "📝 记录真实体验",
-  "🚫 拒绝智商税",
-  "✅ 只买对的",
-  "🔍 先看评价再下单",
-  "💪 做消费的主人",
+const FAQ_ITEMS = [
+  { title: "拔草日记是什么？", content: "拔草日记是一个帮助你记录和复盘购物体验的平台。每次消费后，写下真实感受，帮助自己和他人做出更理性的消费决策。" },
+  { title: "数据存在哪里？安全吗？", content: "所有数据存储在你的浏览器本地（LocalStorage），不会上传到任何服务器。你的消费隐私完全由你掌控。" },
+  { title: "我可以发种草内容吗？", content: "当然可以！拔草日记不仅记录踩雷，也欢迎分享真正好用的商品。真实体验才是最有价值的内容。" },
 ];
 
 export default function HomePage() {
   const diaries = getDiaries();
-  const rationalIndex = calcRationalIndex(diaries);
-  const savingsJar = calcSavingsJar(diaries);
   const recentDiaries = diaries.slice(0, 4);
 
   return (
     <div>
       {/* Hero Section */}
-      <section className="bg-primary brutal-border border-t-0 border-x-0">
-        <div className="max-w-6xl mx-auto px-4 py-16 md:py-24">
+      <section className="bg-brutal-white">
+        <div className="max-w-3xl mx-auto px-4 py-20 md:py-28 text-center">
+          {/* Yellow badge */}
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="inline-block mb-8"
+          >
+            <span className="bg-accent brutal-border px-5 py-2 font-black text-sm inline-flex items-center gap-2">
+              ⚡ 已有 23,456 人在这里避坑
+            </span>
+          </motion.div>
+
+          {/* Giant headline */}
           <motion.h1
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-5xl md:text-7xl font-black text-brutal-black leading-tight mb-4"
+            transition={{ delay: 0.1 }}
+            className="text-6xl md:text-8xl font-black text-brutal-black leading-[1.1] mb-6"
           >
-            买前三思<br />
-            <span className="text-brutal-white bg-brutal-black px-3 inline-block mt-2">拔草有理</span>
+            冲动消费
+            <br />
+            <span className="relative inline-block mt-2">
+              <span className="relative z-10">的照妖镜</span>
+              <span className="absolute bottom-1 left-[-4px] right-[-4px] h-[40%] bg-primary -z-0 -rotate-1" />
+            </span>
           </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-lg md:text-xl text-brutal-black/70 mb-8 max-w-lg"
-          >
-            记录每一次购物体验，用真实评价帮你和朋友避开消费陷阱。
-          </motion.p>
+
+          {/* Subtitle with green left bar */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="flex gap-4 flex-wrap"
+            transition={{ delay: 0.3 }}
+            className="max-w-lg mx-auto mb-10"
+          >
+            <p className="border-l-4 border-primary pl-4 text-lg text-brutal-black/70 text-left leading-relaxed">
+              拒绝无脑种草，看真实的拔草日记。
+              <br />
+              我们用真实体验帮你省下每一分钱。
+            </p>
+          </motion.div>
+
+          {/* Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+            className="flex gap-4 justify-center flex-wrap"
           >
             <Link to="/diary/new">
-              <BrutalButton variant="dark" size="lg">开始记录 ✍️</BrutalButton>
+              <BrutalButton variant="primary" size="lg">写日记吐槽 ✏️</BrutalButton>
             </Link>
             <Link to="/diary">
-              <BrutalButton variant="outline" size="lg">浏览日记 📖</BrutalButton>
+              <BrutalButton variant="outline" size="lg">随便逛逛 →</BrutalButton>
             </Link>
           </motion.div>
         </div>
       </section>
 
-      {/* Infinite Marquee */}
-      <InfiniteMarquee speed={25}>
-        {SLOGANS.map((s, i) => (
-          <span key={i} className="text-primary font-black text-lg mx-4">
-            {s}
-          </span>
-        ))}
-      </InfiniteMarquee>
-
-      {/* Stats Overview */}
-      <section className="max-w-6xl mx-auto px-4 py-12">
-        <h2 className="text-3xl font-black mb-8">📊 社区数据</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <BrutalCard className="text-center py-8">
-            <div className="text-4xl font-black text-primary-dark">
-              <CountUp end={diaries.length} suffix=" 篇" />
-            </div>
-            <p className="text-brutal-black/60 mt-2 font-bold">拔草日记</p>
-          </BrutalCard>
-          <BrutalCard className="text-center py-8">
-            <div className="text-4xl font-black text-primary-dark">
-              <CountUp end={rationalIndex} suffix="%" />
-            </div>
-            <p className="text-brutal-black/60 mt-2 font-bold">理智指数</p>
-          </BrutalCard>
-          <BrutalCard className="text-center py-8">
-            <div className="text-4xl font-black text-danger">
-              <CountUp end={savingsJar} prefix="¥" />
-            </div>
-            <p className="text-brutal-black/60 mt-2 font-bold">踩雷总额 (本可省下)</p>
-          </BrutalCard>
-        </div>
-      </section>
-
       {/* Recent Diaries */}
-      <section className="max-w-6xl mx-auto px-4 py-12">
+      <section className="max-w-3xl mx-auto px-4 py-16">
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-3xl font-black">🔥 最新日记</h2>
-          <Link to="/diary">
-            <BrutalButton variant="outline" size="sm">查看全部 →</BrutalButton>
+          <Link to="/diary" className="font-bold text-brutal-black/50 hover:text-brutal-black transition-colors">
+            查看全部 →
           </Link>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="space-y-8">
           {recentDiaries.map((diary, i) => (
             <DiaryCard key={diary.id} diary={diary} index={i} />
           ))}
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="bg-brutal-black">
-        <div className="max-w-6xl mx-auto px-4 py-16 text-center">
-          <h2 className="text-3xl md:text-4xl font-black text-primary mb-4">
-            别再被种草了，来拔草吧！
+      {/* FAQ */}
+      <section className="max-w-3xl mx-auto px-4 py-12">
+        <h2 className="text-3xl font-black mb-8">❓ 常见问题</h2>
+        <Accordion items={FAQ_ITEMS} />
+      </section>
+
+      {/* CTA - Pink */}
+      <section className="bg-pink border-y-[3px] border-brutal-black">
+        <div className="max-w-3xl mx-auto px-4 py-16 text-center">
+          <h2 className="text-3xl md:text-4xl font-black text-brutal-black mb-8">
+            准备好拔草了吗？
           </h2>
-          <p className="text-brutal-white/60 mb-8">记录你的真实购物体验，帮助更多人理性消费</p>
           <Link to="/diary/new">
-            <BrutalButton variant="primary" size="lg">写第一篇日记 🌿</BrutalButton>
+            <button className="bg-brutal-white brutal-border px-8 py-3 font-black text-lg cursor-pointer brutal-shadow hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all inline-flex items-center gap-2">
+              ✏️ 立刻发布
+            </button>
           </Link>
         </div>
       </section>
+
+      {/* Footer spacer (dark) */}
+      <section className="bg-brutal-black h-16 border-t-[3px] border-brutal-black" />
     </div>
   );
 }
