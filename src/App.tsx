@@ -9,15 +9,16 @@ import DiaryListPage from "./pages/DiaryListPage";
 import WriteDiaryPage from "./pages/WriteDiaryPage";
 import DiaryDetailPage from "./pages/DiaryDetailPage";
 import StatsPage from "./pages/StatsPage";
-
-function Placeholder({ name }: { name: string }) {
-  return (
-    <div className="max-w-6xl mx-auto px-4 py-16">
-      <h1 className="text-5xl font-black mb-4">{name}</h1>
-      <p className="text-brutal-black/60">页面建设中...</p>
-    </div>
-  );
-}
+import UserCenterPage from "./pages/UserCenterPage";
+import CategoryPage from "./pages/CategoryPage";
+import SearchResultPage from "./pages/SearchResultPage";
+import AchievementPage from "./pages/AchievementPage";
+import ServiceIntroPage from "./pages/ServiceIntroPage";
+import ReviewsPage from "./pages/ReviewsPage";
+import AboutPage from "./pages/AboutPage";
+import ContactPage from "./pages/ContactPage";
+import VoiceGuidePage from "./pages/VoiceGuidePage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 function SeedLoader({ children }: { children: React.ReactNode }) {
   useEffect(() => {
@@ -39,16 +40,16 @@ export default function App() {
             <Route path="/diary/new" element={<WriteDiaryPage />} />
             <Route path="/diary/:id" element={<DiaryDetailPage />} />
             <Route path="/stats" element={<StatsPage />} />
-            <Route path="/user" element={<Placeholder name="用户中心" />} />
-            <Route path="/category" element={<Placeholder name="商品分类" />} />
-            <Route path="/search" element={<Placeholder name="搜索结果" />} />
-            <Route path="/achievements" element={<Placeholder name="成就展示" />} />
-            <Route path="/service" element={<Placeholder name="服务介绍" />} />
-            <Route path="/reviews" element={<Placeholder name="客户评价" />} />
-            <Route path="/about" element={<Placeholder name="关于我们" />} />
-            <Route path="/contact" element={<Placeholder name="联系表单" />} />
-            <Route path="/voice-guide" element={<Placeholder name="语音交互" />} />
-            <Route path="*" element={<Placeholder name="404 - 页面走丢了" />} />
+            <Route path="/user" element={<UserCenterPage />} />
+            <Route path="/category" element={<CategoryPage />} />
+            <Route path="/search" element={<SearchResultPage />} />
+            <Route path="/achievements" element={<AchievementPage />} />
+            <Route path="/service" element={<ServiceIntroPage />} />
+            <Route path="/reviews" element={<ReviewsPage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/voice-guide" element={<VoiceGuidePage />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Layout>
       </SeedLoader>
