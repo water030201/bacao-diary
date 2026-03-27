@@ -16,17 +16,17 @@ export default function Accordion({ items }: Props) {
   return (
     <div className="space-y-3">
       {items.map((item, i) => (
-        <div key={i} className="brutal-border bg-brutal-white">
+        <div key={i} className="brutal-border bg-brutal-white rounded-xl brutal-shadow">
           <button
             onClick={() => setOpenIndex(openIndex === i ? null : i)}
-            className="w-full p-4 flex justify-between items-center font-bold text-left cursor-pointer"
+            className="w-full p-5 flex justify-between items-center font-bold text-lg text-left cursor-pointer"
           >
             <span>{item.title}</span>
             <motion.span
-              animate={{ rotate: openIndex === i ? 45 : 0 }}
-              className="text-2xl"
+              animate={{ rotate: openIndex === i ? 180 : 0 }}
+              className="w-8 h-8 border-2 border-brutal-black rounded-full flex items-center justify-center text-sm shrink-0"
             >
-              +
+              ▼
             </motion.span>
           </button>
           <AnimatePresence>

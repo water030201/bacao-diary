@@ -97,7 +97,7 @@ export default function HomePage() {
       {/* Infinite Marquee — 避坑宣言 */}
       <InfiniteMarquee speed={25}>
         {SLOGANS.map((s, i) => (
-          <span key={i} className="text-primary font-black text-lg mx-4">
+          <span key={i} className="text-brutal-black font-black text-lg mx-4">
             {s}
           </span>
         ))}
@@ -144,7 +144,7 @@ export default function HomePage() {
 
       {/* FAQ */}
       <section className="max-w-3xl mx-auto px-4 py-12">
-        <h2 className="text-3xl font-black mb-8">❓ 常见问题</h2>
+        <h2 className="text-4xl md:text-5xl font-black mb-10 text-center">常见问题</h2>
         <Accordion items={FAQ_ITEMS} />
       </section>
 
@@ -155,15 +155,23 @@ export default function HomePage() {
             准备好拔草了吗？
           </h2>
           <Link to="/diary/new">
-            <button className="bg-brutal-white brutal-border px-8 py-3 font-black text-lg cursor-pointer brutal-shadow hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all inline-flex items-center gap-2">
+            <button className="bg-brutal-white brutal-border px-8 py-3 font-black text-lg cursor-pointer brutal-shadow hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all inline-flex items-center gap-2 rounded-lg">
               ✏️ 立刻发布
             </button>
           </Link>
         </div>
       </section>
 
-      {/* Footer spacer (dark) */}
-      <section className="bg-brutal-black h-16 border-t-[3px] border-brutal-black" />
+      {/* White spacer between pink CTA and footer */}
+      <section className="bg-brutal-white h-20" />
+
+      {/* Floating mic button */}
+      <Link
+        to="/voice-guide"
+        className="fixed bottom-6 right-6 w-14 h-14 bg-primary rounded-full brutal-border brutal-shadow flex items-center justify-center text-2xl z-50 hover:scale-110 transition-transform cursor-pointer"
+      >
+        🎙️
+      </Link>
     </div>
   );
 }
