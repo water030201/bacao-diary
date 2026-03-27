@@ -1,6 +1,8 @@
 import { useMemo } from "react";
 import { motion } from "framer-motion";
 import BrutalCard from "../components/ui/BrutalCard";
+import Icon from "../components/ui/Icon";
+import type { IconName } from "../components/ui/Icon";
 import { getDiaries } from "../lib/storage";
 import type { Achievement } from "../types";
 
@@ -18,49 +20,49 @@ function useAchievements(): Achievement[] {
         id: "first-diary",
         name: "初出茅庐",
         description: "写下第一篇拔草日记",
-        icon: "📝",
+        icon: "notepad",
         unlockedAt: diaries.length >= 1 ? now : undefined,
       },
       {
         id: "five-diaries",
         name: "拔草达人",
         description: "累计写下5篇拔草日记",
-        icon: "🌿",
+        icon: "leaf",
         unlockedAt: diaries.length >= 5 ? now : undefined,
       },
       {
         id: "ten-diaries",
         name: "消费侦探",
         description: "累计写下10篇拔草日记",
-        icon: "🔍",
+        icon: "search",
         unlockedAt: diaries.length >= 10 ? now : undefined,
       },
       {
         id: "smart-buyer",
         name: "精明买家",
         description: "3次购物都被判定为值得买",
-        icon: "🧠",
+        icon: "brain",
         unlockedAt: worthCount >= 3 ? now : undefined,
       },
       {
         id: "mine-sweeper",
         name: "排雷专家",
         description: "发现3个踩雷商品，帮助大家避坑",
-        icon: "💣",
+        icon: "bomb",
         unlockedAt: notWorthCount >= 3 ? now : undefined,
       },
       {
         id: "explorer",
         name: "全品类探索者",
         description: "在5个以上品类写过日记",
-        icon: "🗺️",
+        icon: "map",
         unlockedAt: categories.size >= 5 ? now : undefined,
       },
       {
         id: "frugal",
         name: "省钱小能手",
         description: "累计避坑金额超过500元",
-        icon: "💰",
+        icon: "money",
         unlockedAt:
           diaries.filter((d) => d.verdict === "not-worth").reduce((s, d) => s + d.price, 0) >= 500
             ? now
@@ -70,7 +72,7 @@ function useAchievements(): Achievement[] {
         id: "perfectionist",
         name: "满分体验",
         description: "给出一个5星满分评价",
-        icon: "🤩",
+        icon: "star",
         unlockedAt: diaries.some((d) => d.rating === 5) ? now : undefined,
       },
     ];
@@ -83,7 +85,7 @@ export default function AchievementPage() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
-      <h1 className="text-4xl font-black mb-2">🏆 成就展示</h1>
+      <h1 className="text-4xl font-black mb-2"><Icon name="trophy" size={28} className="inline-block" /> 成就展示</h1>
       <p className="text-brutal-black/50 mb-8 font-bold">
         已解锁 {unlocked} / {achievements.length} 个成就
       </p>
@@ -111,7 +113,7 @@ export default function AchievementPage() {
               transition={{ delay: i * 0.05 }}
             >
               <BrutalCard className={`p-5 flex items-center gap-4 ${isUnlocked ? "" : "opacity-40 grayscale"}`}>
-                <div className="text-4xl">{achievement.icon}</div>
+                <div className="text-4xl"><Icon name={achievement.icon as IconName} size={36} /></div>
                 <div className="flex-1">
                   <h3 className="font-black text-lg">{achievement.name}</h3>
                   <p className="text-sm text-brutal-black/60">{achievement.description}</p>

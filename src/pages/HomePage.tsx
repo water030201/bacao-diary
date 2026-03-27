@@ -6,18 +6,19 @@ import InfiniteMarquee from "../components/ui/InfiniteMarquee";
 import CountUp from "../components/ui/CountUp";
 import Accordion from "../components/ui/Accordion";
 import DiaryCard from "../components/diary/DiaryCard";
+import Icon from "../components/ui/Icon";
 import { getDiaries } from "../lib/storage";
 import { calcRationalIndex, calcSavingsJar } from "../lib/stats";
 
 const SLOGANS = [
-  "🌿 理性消费",
-  "💸 拒绝冲动",
-  "🧠 用脑购物",
-  "📝 记录真实体验",
-  "🚫 拒绝智商税",
-  "✅ 只买对的",
-  "🔍 先看评价再下单",
-  "💪 做消费的主人",
+  { icon: "leaf" as const, text: "理性消费" },
+  { icon: "money" as const, text: "拒绝冲动" },
+  { icon: "brain" as const, text: "用脑购物" },
+  { icon: "notepad" as const, text: "记录真实体验" },
+  { icon: "ban" as const, text: "拒绝智商税" },
+  { icon: "check" as const, text: "只买对的" },
+  { icon: "search" as const, text: "先看评价再下单" },
+  { icon: "muscle" as const, text: "做消费的主人" },
 ];
 
 const FAQ_ITEMS = [
@@ -44,7 +45,7 @@ export default function HomePage() {
             className="inline-block mb-8"
           >
             <span className="bg-accent brutal-border px-5 py-2 font-black text-sm inline-flex items-center gap-2">
-              ⚡ 已有 23,456 人在这里避坑
+              <Icon name="zap" size={18} /> 已有 23,456 人在这里避坑
             </span>
           </motion.div>
 
@@ -85,7 +86,7 @@ export default function HomePage() {
             className="flex gap-4 justify-center flex-wrap"
           >
             <Link to="/diary/new">
-              <BrutalButton variant="primary" size="lg">写日记吐槽 ✏️</BrutalButton>
+              <BrutalButton variant="primary" size="lg">写日记吐槽 <Icon name="pencil" size={18} /></BrutalButton>
             </Link>
             <Link to="/diary">
               <BrutalButton variant="outline" size="lg">随便逛逛 →</BrutalButton>
@@ -97,8 +98,9 @@ export default function HomePage() {
       {/* Infinite Marquee — 避坑宣言 */}
       <InfiniteMarquee speed={25}>
         {SLOGANS.map((s, i) => (
-          <span key={i} className="text-brutal-black font-black text-lg mx-4">
-            {s}
+          <span key={i} className="text-brutal-black font-black text-lg mx-4 inline-flex items-center gap-1.5">
+            <Icon name={s.icon} size={18} />
+            {s.text}
           </span>
         ))}
       </InfiniteMarquee>
@@ -130,7 +132,7 @@ export default function HomePage() {
       {/* Recent Diaries */}
       <section className="max-w-3xl mx-auto px-4 py-16">
         <div className="flex justify-between items-center mb-8">
-          <h2 className="text-3xl font-black">🔥 最新日记</h2>
+          <h2 className="text-3xl font-black inline-flex items-center gap-2"><Icon name="fire" size={28} /> 最新日记</h2>
           <Link to="/diary" className="font-bold text-brutal-black/50 hover:text-brutal-black transition-colors">
             查看全部 →
           </Link>
@@ -156,7 +158,7 @@ export default function HomePage() {
           </h2>
           <Link to="/diary/new">
             <button className="bg-brutal-white brutal-border px-8 py-3 font-black text-lg cursor-pointer brutal-shadow hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all inline-flex items-center gap-2 rounded-lg">
-              ✏️ 立刻发布
+              <Icon name="pencil" size={20} /> 立刻发布
             </button>
           </Link>
         </div>
@@ -170,7 +172,7 @@ export default function HomePage() {
         to="/voice-guide"
         className="fixed bottom-6 right-6 w-14 h-14 bg-primary rounded-full brutal-border brutal-shadow flex items-center justify-center text-2xl z-50 hover:scale-110 transition-transform cursor-pointer"
       >
-        🎙️
+        <Icon name="mic" size={24} />
       </Link>
     </div>
   );

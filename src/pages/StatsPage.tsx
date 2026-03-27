@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import Icon from "../components/ui/Icon";
 import BrutalCard from "../components/ui/BrutalCard";
 import CountUp from "../components/ui/CountUp";
 import SavingsJar from "../components/stats/SavingsJar";
@@ -32,7 +33,7 @@ export default function StatsPage() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
-      <h1 className="text-4xl font-black mb-8">📊 消费统计</h1>
+      <h1 className="text-4xl font-black mb-8"><Icon name="chart" size={28} className="inline-block" /> 消费统计</h1>
 
       {/* Stat Cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">

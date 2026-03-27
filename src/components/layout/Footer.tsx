@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Icon from "../ui/Icon";
 
 export default function Footer() {
   return (
@@ -6,7 +7,7 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <h3 className="text-primary font-black text-xl mb-3">🌿 拔草日记</h3>
+            <h3 className="text-primary font-black text-xl mb-3"><Icon name="leaf" size={20} className="inline-block" /> 拔草日记</h3>
             <p className="text-brutal-white/70 text-sm">理性消费，快乐生活。记录每一次购物体验，做更聪明的消费者。</p>
           </div>
           <div>

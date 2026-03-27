@@ -2,15 +2,17 @@ import { motion } from "framer-motion";
 import BrutalCard from "../components/ui/BrutalCard";
 import Accordion from "../components/ui/Accordion";
 import BrutalButton from "../components/ui/BrutalButton";
+import Icon from "../components/ui/Icon";
+import type { IconName } from "../components/ui/Icon";
 import { Link } from "react-router-dom";
 
-const FEATURES = [
-  { icon: "📝", title: "拔草日记", desc: "记录每次购物的真实体验，包括评分、动机和使用感受" },
-  { icon: "📊", title: "消费统计", desc: "可视化你的消费数据，了解花钱习惯" },
-  { icon: "🏆", title: "成就系统", desc: "游戏化体验，解锁消费达人成就" },
-  { icon: "🔍", title: "智能搜索", desc: "快速找到你关心的商品评价" },
-  { icon: "🎤", title: "语音交互", desc: "动口不动手，语音输入消费记录" },
-  { icon: "💰", title: "存钱罐", desc: "统计踩雷金额，提醒自己理性消费" },
+const FEATURES: { icon: IconName; title: string; desc: string }[] = [
+  { icon: "notepad", title: "拔草日记", desc: "记录每次购物的真实体验，包括评分、动机和使用感受" },
+  { icon: "chart", title: "消费统计", desc: "可视化你的消费数据，了解花钱习惯" },
+  { icon: "trophy", title: "成就系统", desc: "游戏化体验，解锁消费达人成就" },
+  { icon: "search", title: "智能搜索", desc: "快速找到你关心的商品评价" },
+  { icon: "mic", title: "语音交互", desc: "动口不动手，语音输入消费记录" },
+  { icon: "money", title: "存钱罐", desc: "统计踩雷金额，提醒自己理性消费" },
 ];
 
 const FAQ_ITEMS = [
@@ -24,7 +26,7 @@ const FAQ_ITEMS = [
 export default function ServiceIntroPage() {
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
-      <h1 className="text-4xl font-black mb-2">🌿 服务介绍</h1>
+      <h1 className="text-4xl font-black mb-2"><Icon name="leaf" size={28} className="inline-block" /> 服务介绍</h1>
       <p className="text-brutal-black/50 mb-12 text-lg">了解拔草日记能为你做什么</p>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
@@ -36,7 +38,7 @@ export default function ServiceIntroPage() {
             transition={{ delay: i * 0.08 }}
           >
             <BrutalCard className="p-6 text-center h-full">
-              <div className="text-4xl mb-3">{f.icon}</div>
+              <div className="text-4xl mb-3"><Icon name={f.icon} size={36} /></div>
               <h3 className="font-black text-lg mb-2">{f.title}</h3>
               <p className="text-sm text-brutal-black/60">{f.desc}</p>
             </BrutalCard>
@@ -49,7 +51,7 @@ export default function ServiceIntroPage() {
 
       <div className="text-center mt-12">
         <Link to="/diary/new">
-          <BrutalButton variant="dark" size="lg">立即开始记录 🚀</BrutalButton>
+          <BrutalButton variant="dark" size="lg">立即开始记录 <Icon name="rocket" size={18} className="inline-block" /></BrutalButton>
         </Link>
       </div>
     </div>
