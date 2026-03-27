@@ -23,20 +23,23 @@ export default function Header() {
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden md:flex gap-6">
-          {NAV_ITEMS.map(({ to, label }) => (
-            <Link
-              key={to}
-              to={to}
-              className={`font-bold text-sm transition-colors ${
-                location.pathname === to
-                  ? "text-brutal-black"
-                  : "text-brutal-black/50 hover:text-brutal-black"
-              }`}
-            >
-              {label}
-            </Link>
-          ))}
+        <nav className="hidden md:flex gap-1">
+          {NAV_ITEMS.map(({ to, label }) => {
+            const isActive = location.pathname === to;
+            return (
+              <Link
+                key={to}
+                to={to}
+                className={`px-4 py-1.5 font-bold text-sm transition-all duration-150 border-2 ${
+                  isActive
+                    ? "bg-primary border-brutal-black text-brutal-black"
+                    : "border-transparent text-brutal-black/60 hover:bg-primary/30 hover:border-brutal-black hover:text-brutal-black"
+                }`}
+              >
+                {label}
+              </Link>
+            );
+          })}
         </nav>
 
         {/* Right side */}
@@ -78,7 +81,7 @@ export default function Header() {
                 to={to}
                 onClick={() => setMenuOpen(false)}
                 className={`block px-6 py-3 font-bold border-b border-brutal-black/10 ${
-                  location.pathname === to ? "bg-primary/10 text-brutal-black" : "text-brutal-black/70"
+                  location.pathname === to ? "bg-primary text-brutal-black border-l-4 border-l-brutal-black" : "text-brutal-black/70"
                 }`}
               >
                 {label}

@@ -1,9 +1,24 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import BrutalButton from "../components/ui/BrutalButton";
+import BrutalCard from "../components/ui/BrutalCard";
+import InfiniteMarquee from "../components/ui/InfiniteMarquee";
+import CountUp from "../components/ui/CountUp";
 import Accordion from "../components/ui/Accordion";
 import DiaryCard from "../components/diary/DiaryCard";
 import { getDiaries } from "../lib/storage";
+import { calcRationalIndex, calcSavingsJar } from "../lib/stats";
+
+const SLOGANS = [
+  "🌿 理性消费",
+  "💸 拒绝冲动",
+  "🧠 用脑购物",
+  "📝 记录真实体验",
+  "🚫 拒绝智商税",
+  "✅ 只买对的",
+  "🔍 先看评价再下单",
+  "💪 做消费的主人",
+];
 
 const FAQ_ITEMS = [
   { title: "拔草日记是什么？", content: "拔草日记是一个帮助你记录和复盘购物体验的平台。每次消费后，写下真实感受，帮助自己和他人做出更理性的消费决策。" },
@@ -14,6 +29,8 @@ const FAQ_ITEMS = [
 export default function HomePage() {
   const diaries = getDiaries();
   const recentDiaries = diaries.slice(0, 4);
+  const rationalIndex = calcRationalIndex(diaries);
+  const savingsJar = calcSavingsJar(diaries);
 
   return (
     <div>
@@ -74,6 +91,39 @@ export default function HomePage() {
               <BrutalButton variant="outline" size="lg">随便逛逛 →</BrutalButton>
             </Link>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Infinite Marquee — 避坑宣言 */}
+      <InfiniteMarquee speed={25}>
+        {SLOGANS.map((s, i) => (
+          <span key={i} className="text-primary font-black text-lg mx-4">
+            {s}
+          </span>
+        ))}
+      </InfiniteMarquee>
+
+      {/* Stats Overview */}
+      <section className="max-w-3xl mx-auto px-4 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <BrutalCard className="text-center py-8">
+            <div className="text-4xl font-black text-primary-dark">
+              <CountUp end={diaries.length} suffix=" 篇" />
+            </div>
+            <p className="text-brutal-black/60 mt-2 font-bold">拔草日记</p>
+          </BrutalCard>
+          <BrutalCard className="text-center py-8">
+            <div className="text-4xl font-black text-primary-dark">
+              <CountUp end={rationalIndex} suffix="%" />
+            </div>
+            <p className="text-brutal-black/60 mt-2 font-bold">理智指数</p>
+          </BrutalCard>
+          <BrutalCard className="text-center py-8">
+            <div className="text-4xl font-black text-danger">
+              <CountUp end={savingsJar} prefix="¥" />
+            </div>
+            <p className="text-brutal-black/60 mt-2 font-bold">踩雷总额</p>
+          </BrutalCard>
         </div>
       </section>
 
