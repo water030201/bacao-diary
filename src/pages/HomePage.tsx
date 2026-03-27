@@ -59,7 +59,7 @@ export default function HomePage() {
             冲动消费
             <br />
             <span className="relative inline-block mt-2">
-              <span className="relative z-10 bg-brutal-black text-brutal-white px-4 py-1 -rotate-2 inline-block shadow-[6px_6px_0px_#66BB6A]">的照妖镜</span>
+              <span className="relative z-10 bg-brutal-black text-brutal-white px-4 py-1 -rotate-2 inline-block shadow-[6px_6px_0px_#4ADE80]">的照妖镜</span>
             </span>
           </motion.h1>
 
