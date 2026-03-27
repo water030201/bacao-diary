@@ -4,6 +4,12 @@ import Layout from "./components/layout/Layout";
 import { getDiaries, saveDiary } from "./lib/storage";
 import { SEED_DIARIES } from "./data/seed";
 
+import HomePage from "./pages/HomePage";
+import DiaryListPage from "./pages/DiaryListPage";
+import WriteDiaryPage from "./pages/WriteDiaryPage";
+import DiaryDetailPage from "./pages/DiaryDetailPage";
+import StatsPage from "./pages/StatsPage";
+
 function Placeholder({ name }: { name: string }) {
   return (
     <div className="max-w-6xl mx-auto px-4 py-16">
@@ -28,11 +34,11 @@ export default function App() {
       <SeedLoader>
         <Layout>
           <Routes>
-            <Route path="/" element={<Placeholder name="首页" />} />
-            <Route path="/diary" element={<Placeholder name="日记列表" />} />
-            <Route path="/diary/new" element={<Placeholder name="写日记" />} />
-            <Route path="/diary/:id" element={<Placeholder name="日记详情" />} />
-            <Route path="/stats" element={<Placeholder name="统计分析" />} />
+            <Route path="/" element={<HomePage />} />
+            <Route path="/diary" element={<DiaryListPage />} />
+            <Route path="/diary/new" element={<WriteDiaryPage />} />
+            <Route path="/diary/:id" element={<DiaryDetailPage />} />
+            <Route path="/stats" element={<StatsPage />} />
             <Route path="/user" element={<Placeholder name="用户中心" />} />
             <Route path="/category" element={<Placeholder name="商品分类" />} />
             <Route path="/search" element={<Placeholder name="搜索结果" />} />
