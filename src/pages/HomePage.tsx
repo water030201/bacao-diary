@@ -44,7 +44,7 @@ export default function HomePage() {
             animate={{ opacity: 1, y: 0 }}
             className="inline-block mb-8"
           >
-            <span className="bg-accent brutal-border px-5 py-2 font-black text-sm inline-flex items-center gap-2">
+            <span className="bg-accent brutal-border px-5 py-2 font-black text-sm inline-flex items-center gap-2 brutal-shadow rounded-lg">
               <Icon name="zap" size={18} /> 已有 23,456 人在这里避坑
             </span>
           </motion.div>
@@ -59,7 +59,7 @@ export default function HomePage() {
             冲动消费
             <br />
             <span className="relative inline-block mt-2">
-              <span className="relative z-10 bg-brutal-black text-brutal-white px-4 py-1 -rotate-2 inline-block shadow-[6px_6px_0px_#00FF66]">的照妖镜</span>
+              <span className="relative z-10 bg-brutal-black text-brutal-white px-4 py-1 -rotate-2 inline-block shadow-[6px_6px_0px_#4CAF50]">的照妖镜</span>
             </span>
           </motion.h1>
 
@@ -71,7 +71,10 @@ export default function HomePage() {
             className="max-w-lg mx-auto mb-10"
           >
             <p className="border-l-4 border-primary pl-4 text-lg text-brutal-black/70 text-left leading-relaxed">
-              拒绝无脑种草，看真实的拔草日记。
+              <span className="relative inline">
+                <span className="relative z-10">拒绝无脑种草，看真实的拔草日记。</span>
+                <span className="absolute bottom-0 left-0 right-0 h-[35%] bg-primary/40 -z-0" />
+              </span>
               <br />
               我们用真实体验帮你省下每一分钱。
             </p>
@@ -82,13 +85,13 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
-            className="flex gap-4 justify-center flex-wrap"
+            className="flex gap-4 justify-center"
           >
-            <Link to="/diary/new">
-              <BrutalButton variant="primary" size="lg">写日记吐槽 <Icon name="pencil" size={18} /></BrutalButton>
+            <Link to="/diary/new" className="min-w-[200px]">
+              <BrutalButton variant="primary" size="lg" className="w-full">写日记吐槽 <Icon name="pencil" size={18} /></BrutalButton>
             </Link>
-            <Link to="/diary">
-              <BrutalButton variant="outline" size="lg">随便逛逛 →</BrutalButton>
+            <Link to="/diary" className="min-w-[200px]">
+              <BrutalButton variant="outline" size="lg" className="w-full">随便逛逛 →</BrutalButton>
             </Link>
           </motion.div>
         </div>
@@ -97,9 +100,10 @@ export default function HomePage() {
       {/* Infinite Marquee — 避坑宣言 */}
       <InfiniteMarquee speed={25}>
         {SLOGANS.map((s, i) => (
-          <span key={i} className="text-brutal-black font-black text-lg mx-4 inline-flex items-center gap-1.5">
-            <Icon name={s.icon} size={18} />
+          <span key={i} className="text-brutal-black font-black text-xl mx-2 inline-flex items-center gap-2">
+            <Icon name={s.icon} size={20} className="stroke-[2.5]" />
             {s.text}
+            <span className="text-brutal-black ml-2">★</span>
           </span>
         ))}
       </InfiniteMarquee>
@@ -131,7 +135,7 @@ export default function HomePage() {
       {/* Recent Diaries */}
       <section className="max-w-3xl mx-auto px-4 py-16">
         <div className="flex justify-between items-center mb-8">
-          <h2 className="text-3xl font-black inline-flex items-center gap-2"><Icon name="fire" size={28} /> 最新日记</h2>
+          <h2 className="text-4xl md:text-5xl font-black inline-flex items-center gap-2"><Icon name="fire" size={28} /> 最新日记</h2>
           <Link to="/diary" className="font-bold text-brutal-black/50 hover:text-brutal-black transition-colors">
             查看全部 →
           </Link>

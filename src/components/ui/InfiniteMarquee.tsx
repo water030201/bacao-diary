@@ -10,7 +10,7 @@ export default function InfiniteMarquee({ children, speed = 20, direction = "lef
   const x = direction === "left" ? ["0%", "-50%"] : ["-50%", "0%"];
 
   return (
-    <div className="overflow-hidden brutal-border bg-accent py-3">
+    <div className="overflow-hidden brutal-border bg-accent py-4">
       <motion.div
         className="flex whitespace-nowrap gap-8"
         animate={{ x }}

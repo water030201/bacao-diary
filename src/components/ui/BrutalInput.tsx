@@ -15,7 +15,7 @@ function isTextarea(props: Props): props is TextareaProps {
 
 export default function BrutalInput(props: Props) {
   const { label, className = "", ...rest } = props;
-  const base = "w-full bg-brutal-white brutal-border p-3 font-medium text-brutal-black placeholder:text-gray-400 focus:outline-none focus:shadow-[4px_4px_0px_#00FF66] transition-shadow";
+  const base = "w-full bg-brutal-white brutal-border p-3 font-medium text-brutal-black placeholder:text-gray-400 focus:outline-none focus:shadow-[4px_4px_0px_#4CAF50] transition-shadow rounded-lg";
 
   return (
     <div className="space-y-1">

@@ -12,7 +12,7 @@ export default function BrutalCard({ children, className = "", hover = false, on
     <motion.div
       whileHover={hover ? { translateX: -2, translateY: -2, boxShadow: "6px 6px 0px #1A1A1A" } : undefined}
       onClick={onClick}
-      className={`bg-brutal-white brutal-border brutal-shadow p-4 ${onClick ? "cursor-pointer" : ""} ${className}`}
+      className={`bg-brutal-white brutal-border brutal-shadow p-4 rounded-xl ${onClick ? "cursor-pointer" : ""} ${className}`}
     >
       {children}
     </motion.div>

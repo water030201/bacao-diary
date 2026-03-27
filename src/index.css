@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #00FF66;
-  --color-primary-dark: #0A6B35;
+  --color-primary: #4CAF50;
+  --color-primary-dark: #2E7D32;
   --color-brutal-black: #1A1A1A;
   --color-brutal-white: #F5F5F0;
   --color-accent: #FFE500;
@@ -19,13 +19,13 @@ body {
 
 /* Brutal shadow utility */
 .brutal-shadow {
-  box-shadow: 4px 4px 0px #1A1A1A;
+  box-shadow: 5px 5px 0px #1A1A1A;
 }
 
 .brutal-shadow-lg {
-  box-shadow: 6px 6px 0px #1A1A1A;
+  box-shadow: 8px 8px 0px #1A1A1A;
 }
 
 .brutal-border {
-  border: 3px solid #1A1A1A;
+  border: 3.5px solid #1A1A1A;
 }
