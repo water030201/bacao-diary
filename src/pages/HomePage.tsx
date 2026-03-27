@@ -59,7 +59,7 @@ export default function HomePage() {
             冲动消费
             <br />
             <span className="relative inline-block mt-2">
-              <span className="relative z-10 bg-brutal-black text-brutal-white px-4 py-1 -rotate-2 inline-block shadow-[6px_6px_0px_#4CAF50]">的照妖镜</span>
+              <span className="relative z-10 bg-brutal-black text-brutal-white px-4 py-1 -rotate-2 inline-block shadow-[6px_6px_0px_#66BB6A]">的照妖镜</span>
             </span>
           </motion.h1>
 
@@ -88,7 +88,7 @@ export default function HomePage() {
             className="flex gap-4 justify-center"
           >
             <Link to="/diary/new" className="min-w-[200px]">
-              <BrutalButton variant="primary" size="lg" className="w-full">写日记吐槽 <Icon name="pencil" size={18} /></BrutalButton>
+              <BrutalButton variant="primary" size="lg" className="w-full whitespace-nowrap inline-flex items-center justify-center gap-2">写日记吐槽 <Icon name="pencil" size={18} /></BrutalButton>
             </Link>
             <Link to="/diary" className="min-w-[200px]">
               <BrutalButton variant="outline" size="lg" className="w-full">随便逛逛 →</BrutalButton>
