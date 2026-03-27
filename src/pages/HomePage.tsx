@@ -100,10 +100,9 @@ export default function HomePage() {
       {/* Infinite Marquee — 避坑宣言 */}
       <InfiniteMarquee speed={25}>
         {SLOGANS.map((s, i) => (
-          <span key={i} className="text-brutal-black font-black text-xl mx-2 inline-flex items-center gap-2">
-            <Icon name={s.icon} size={20} className="stroke-[2.5]" />
+          <span key={i} className="text-brutal-black font-black text-xl mx-2 inline-flex items-center gap-3">
             {s.text}
-            <span className="text-brutal-black ml-2">★</span>
+            <span className="text-brutal-black">★</span>
           </span>
         ))}
       </InfiniteMarquee>
