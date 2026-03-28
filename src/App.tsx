@@ -1,8 +1,5 @@
 import { HashRouter, Routes, Route } from "react-router-dom";
-import { useEffect } from "react";
 import Layout from "./components/layout/Layout";
-import { getDiaries, saveDiary } from "./lib/storage";
-import { SEED_DIARIES } from "./data/seed";
 
 import HomePage from "./pages/HomePage";
 import DiaryListPage from "./pages/DiaryListPage";
@@ -20,21 +17,11 @@ import ContactPage from "./pages/ContactPage";
 import VoiceGuidePage from "./pages/VoiceGuidePage";
 import NotFoundPage from "./pages/NotFoundPage";
 
-function SeedLoader({ children }: { children: React.ReactNode }) {
-  useEffect(() => {
-    if (getDiaries().length === 0) {
-      SEED_DIARIES.forEach(saveDiary);
-    }
-  }, []);
-  return <>{children}</>;
-}
-
 export default function App() {
   return (
     <HashRouter>
-      <SeedLoader>
-        <Layout>
-          <Routes>
+      <Layout>
+        <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/diary" element={<DiaryListPage />} />
             <Route path="/diary/new" element={<WriteDiaryPage />} />
@@ -52,7 +39,6 @@ export default function App() {
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Layout>
-      </SeedLoader>
     </HashRouter>
   );
 }
