@@ -1,7 +1,54 @@
 # 拔草日记 — 开发进度文档
 
-> 最后更新：2026-04-01
-> 状态：**前端完成，Figma已导入，测试报告已完成，进入Figma整理+论文阶段**
+> 最后更新：2026-04-07
+> 状态：**前端 + 视觉增强 + 主题化拔草特效 + 关灯主题 + Supabase 云端数据全部完成**
+
+## 📦 2026-04-07 增强日志（应对导师"做复杂、写复杂"的反馈）
+
+### 第一批：沉浸式交互层
+| 增强 | 说明 | 文件 |
+|---|---|---|
+| 自定义鼠标 + 磁吸 | 弹簧跟随、混合差值、按钮磁吸 | `src/components/ui/CustomCursor.tsx` |
+| 命令面板 ⌘K | 全局快捷键、模糊搜索、键盘导航跳转15页 | `src/components/ui/CommandPalette.tsx` |
+| 滚动进度条 | 顶部 framer-motion useScroll 弹簧 | `src/components/ui/ScrollProgress.tsx` |
+| 滚动揭示动画 | 通用包装器 useInView | `src/components/ui/ScrollReveal.tsx` |
+| 统计页升级 | 时间/品类筛选 + 雷达图 + 堆叠面积图 | `src/pages/StatsPage.tsx`、`src/lib/stats.ts` |
+| three.js 装饰背景 | 粒子场 + 旋转线框正二十面体 + 鼠标视差 | `src/components/ui/ThreeBackground.tsx` |
+
+### 第二批：关灯主题
+| 增强 | 说明 | 文件 |
+|---|---|---|
+| 暗色主题切换 | clip-path 圆形扩散转场 + localStorage 持久化 + prefers-color-scheme 感知 | `src/components/ui/ThemeToggle.tsx`、`src/index.css` |
+
+### 第三批：主题化拔草特效
+| 增强 | 说明 | 文件 |
+|---|---|---|
+| GrassBurst 草叶飞溅 | Canvas 物理粒子 + CustomEvent 全局总线 | `src/components/ui/GrassBurstLayer.tsx`、`src/lib/grassBurst.ts` |
+| 互动空状态草地 | 8 棵草苗逐颗拔出 + 进度条 + 庆祝层 | `src/components/ui/GrassPullField.tsx` |
+| 写日记成功庆祝 | 60 片草叶屏幕中央爆发 | `src/components/diary/DiaryForm.tsx` |
+
+### 第四批：Supabase 云端公共数据
+| 文件 | 作用 |
+|---|---|
+| `src/lib/supabase.ts` | 客户端，env 变量未配置自动返回 null（降级 LocalStorage） |
+| `src/lib/cloudSync.ts` | 云端 CRUD 封装（fetchAll/upsert/delete），camelCase ↔ snake_case |
+| `src/lib/storage.ts` | 改造为内存缓存 + 双写（本地 + 云端），保持同步 API 不变 |
+| `src/main.tsx` | 启动时优先云端，失败降级本地；首次部署一次性注入种子（用 localStorage flag 防止复活） |
+| `src/vite-env.d.ts` | Vite 环境变量 TS 类型 |
+| `docs/supabase-schema.sql` | 数据库 schema（建表 + 索引 + RLS + 触发器） |
+| `docs/SUPABASE-SETUP.md` | 6 步配置说明 |
+
+**云端架构**：BaaS（Supabase Postgres + RLS）+ Offline-First（内存缓存 / LocalStorage / 云端 三级数据流）+ 透明降级。10 个业务页面零侵入。
+
+### 部署
+- **线上地址**：https://water030201.github.io/bacao-diary/（HashRouter，国内可访问）
+- **数据库**：Supabase（Tokyo region），RLS 公共读写策略
+- **部署命令**：`npm run deploy`（自动 build + 推 gh-pages 分支）
+
+### 配套文档
+- `docs/技术架构与创新点.md` — 答辩 / 论文用，含架构图 / 创新点 / 应答 Q&A / 术语对照
+- `docs/SUPABASE-SETUP.md` — 云端配置 6 步指南
+- `docs/supabase-schema.sql` — 一键建库 SQL
 
 ---
 
@@ -74,9 +121,10 @@
 ## 六、部署信息
 
 - **GitHub 仓库**：https://github.com/water030201/bacao-diary
-- **线上地址**：https://bacao-diary.vercel.app
+- **线上地址（GitHub Pages）**：https://water030201.github.io/bacao-diary/（国内可访问）
+- **线上地址（Vercel）**：https://bacao-diary.vercel.app（国内被墙）
 - **路由模式**：HashRouter（URL带 `/#/` 前缀）
-- **自动部署**：push 到 main 分支后 Vercel 自动构建部署
+- **部署方式**：gh-pages 分支部署到 GitHub Pages；Vercel 自动部署（备用）
 
 ## 七、交付物清单
 
@@ -90,8 +138,8 @@
   - [x] 成就展示页已导入
   - [x] 日记列表页、日记详情页、商品分类页、搜索结果页已导入
   - [x] 剩余P2页面（服务介绍/评价/关于/联系/语音/404）已导入
-  - [ ] **Figma整理（进行中）**：图层命名规范化、组件抽取、Auto Layout整理、设计规范页
-- [ ] Figma设计源文件（.fig）+ 设计规范 + 切图
+  - [x] **Figma整理** ✅：图层命名规范化、组件抽取、Auto Layout整理、设计规范页
+- [x] Figma设计源文件（.fig）+ 设计规范 + 切图 ✅
 - [ ] 毕业论文（≥8000字）
 - [ ] 演示视频（3-5分钟）
 - [ ] 答辩PPT
@@ -105,7 +153,7 @@
 第5-6周   (2.3-2.16)   高保真设计、设计规范、组件库      ✅ 已完成
 第7-9周   (2.17-3.9)   项目架构、基础页面、路由          ✅ 已完成
 第10-12周 (3.10-3.30)  核心功能开发                     ✅ 已完成（3.27代码全部完成）
-第13-14周 (3.31-4.13)  Figma设计稿、测试报告、优化       🔄 进行中（测试报告✅，Figma整理中）
+第13-14周 (3.31-4.13)  Figma设计稿、测试报告、优化       ✅ 已完成（测试报告✅，Figma整理✅）
 第15-16周 (4.14-4.27)  论文撰写、答辩PPT                ⬜
 第17周    (4.28-5.4)   答辩                             ⬜
 ```
@@ -121,9 +169,9 @@
 ## 十、下一步待办（按优先级）
 
 1. ~~完成Figma设计稿导入~~ ✅（15页全部导入完成）
-2. **Figma整理**（图层重命名、抽取组件、Auto Layout、设计规范页）← 当前
+2. ~~Figma整理~~ ✅（图层重命名、抽取组件、Auto Layout、设计规范页）
 3. ~~测试报告~~ ✅（已生成，76条用例，Word文档已导出）
-4. **毕业论文初稿**（≥8000字）
+4. **毕业论文初稿**（≥8000字）← 当前
 5. **答辩PPT**
 6. **演示视频录制**
 
@@ -136,6 +184,7 @@
 > 这是毕设项目《拔草日记》，购物推广网站，新粗野主义风格（绿黑撞色/粗边框/硬阴影）。
 > 15页全响应式已全部完成，Vite+React+TypeScript+Tailwind，已部署到Vercel。
 > GitHub: https://github.com/water030201/bacao-diary
-> 线上: https://bacao-diary.vercel.app（BrowserRouter，直接路径，无 #）
-> 当前阶段：Figma设计稿导入中 → 下一步：测试报告 → 论文 → 答辩PPT。
+> 线上（GitHub Pages）: https://water030201.github.io/bacao-diary/（国内可访问）
+> 线上（Vercel备用）: https://bacao-diary.vercel.app（国内被墙）
+> 当前阶段：论文撰写 → 答辩PPT → 演示视频。
 > 请阅读本文件了解完整上下文后继续任务。

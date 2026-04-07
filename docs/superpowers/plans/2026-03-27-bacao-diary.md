@@ -1,3 +1,4 @@
+
 # 拔草日记 Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
@@ -102,6 +103,7 @@ If the directory is not empty, say yes to proceed (it only has docs and DEV-PROG
 - [ ] **Step 2: Install dependencies**
 
 ```bash
+
 npm install react-router-dom framer-motion recharts
 npm install -D tailwindcss @tailwindcss/vite
 ```

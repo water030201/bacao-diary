@@ -29,3 +29,54 @@ body {
 .brutal-border {
   border: 3.5px solid #1A1A1A;
 }
+
+/* === 关灯主题 === */
+html.dark,
+html.dark body,
+html.dark main {
+  background-color: #0A0A0A;
+  color: #F5F5F0;
+}
+html.dark footer {
+  background-color: #161616 !important;
+  color: #F5F5F0 !important;
+}
+html.dark .brutal-shadow {
+  box-shadow: 5px 5px 0px #00FF66;
+}
+html.dark .brutal-shadow-lg {
+  box-shadow: 8px 8px 0px #00FF66;
+}
+html.dark .brutal-border {
+  border-color: #00FF66;
+}
+/* Tailwind 调色覆盖 */
+html.dark .bg-brutal-white { background-color: #141414 !important; }
+html.dark .text-brutal-black { color: #F5F5F0 !important; }
+html.dark .text-brutal-black\/20 { color: rgba(245, 245, 240, 0.45) !important; }
+html.dark .text-brutal-black\/30 { color: rgba(245, 245, 240, 0.55) !important; }
+html.dark .text-brutal-black\/50 { color: rgba(245, 245, 240, 0.7) !important; }
+html.dark .text-brutal-black\/60 { color: rgba(245, 245, 240, 0.78) !important; }
+html.dark .text-brutal-black\/70 { color: rgba(245, 245, 240, 0.85) !important; }
+html.dark .text-brutal-black\/80 { color: rgba(245, 245, 240, 0.9) !important; }
+html.dark .border-brutal-black { border-color: #00FF66 !important; }
+html.dark .border-brutal-black\/10 { border-color: rgba(0, 255, 102, 0.2) !important; }
+/* 故意保留：bg-brutal-black 和 text-brutal-white 在亮色下是反色高亮块（如 Footer/Hero 内嵌黑块），
+   暗色下让它们变成"更暗的深灰"以保持层次而不是反过来变白 */
+html.dark .bg-brutal-black { background-color: #161616 !important; }
+html.dark .text-brutal-white { color: #F5F5F0 !important; }
+html.dark .text-brutal-white\/70 { color: rgba(245, 245, 240, 0.75) !important; }
+html.dark .text-brutal-white\/50 { color: rgba(245, 245, 240, 0.55) !important; }
+html.dark .text-brutal-white\/20 { color: rgba(245, 245, 240, 0.25) !important; }
+html.dark .border-brutal-white\/20 { border-color: rgba(0, 255, 102, 0.25) !important; }
+/* 命令面板/卡片硬编码颜色覆盖 */
+html.dark .bg-\[\#F5F5F0\] { background-color: #1A1A1A !important; }
+html.dark .border-black { border-color: #00FF66 !important; }
+html.dark .shadow-\[8px_8px_0_\#1A1A1A\] { box-shadow: 8px 8px 0 #00FF66 !important; }
+html.dark .shadow-\[3px_3px_0_\#1A1A1A\] { box-shadow: 3px 3px 0 #00FF66 !important; }
+html.dark .shadow-\[2px_2px_0_\#1A1A1A\] { box-shadow: 2px 2px 0 #00FF66 !important; }
+/* 关灯动画的圆形扩散 mask */
+@keyframes lights-out-reveal {
+  from { clip-path: circle(0% at var(--cx, 50%) var(--cy, 50%)); }
+  to   { clip-path: circle(150% at var(--cx, 50%) var(--cy, 50%)); }
+}

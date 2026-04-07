@@ -7,6 +7,8 @@ import CountUp from "../components/ui/CountUp";
 import Accordion from "../components/ui/Accordion";
 import DiaryCard from "../components/diary/DiaryCard";
 import Icon from "../components/ui/Icon";
+import ThreeBackground from "../components/ui/ThreeBackground";
+import { triggerGrassBurst } from "../lib/grassBurst";
 import { getDiaries } from "../lib/storage";
 import { calcRationalIndex, calcSavingsJar } from "../lib/stats";
 
@@ -36,8 +38,9 @@ export default function HomePage() {
   return (
     <div>
       {/* Hero Section */}
-      <section className="bg-brutal-white">
-        <div className="max-w-3xl mx-auto px-4 py-20 md:py-28 text-center">
+      <section className="bg-brutal-white relative overflow-hidden">
+        <ThreeBackground className="absolute inset-0 opacity-60" />
+        <div className="max-w-3xl mx-auto px-4 py-20 md:py-28 text-center relative z-10">
           {/* Yellow badge */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
@@ -87,7 +90,11 @@ export default function HomePage() {
             transition={{ delay: 0.5 }}
             className="flex gap-4 justify-center"
           >
-            <Link to="/diary/new" className="min-w-[200px]">
+            <Link
+              to="/diary/new"
+              className="min-w-[200px]"
+              onClick={(e) => triggerGrassBurst(e.clientX, e.clientY, 36)}
+            >
               <BrutalButton variant="primary" size="lg" className="w-full whitespace-nowrap inline-flex items-center justify-center gap-2">写日记吐槽 <Icon name="pencil" size={18} /></BrutalButton>
             </Link>
             <Link to="/diary" className="min-w-[200px]">

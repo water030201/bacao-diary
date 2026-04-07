@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import ThemeToggle from "../ui/ThemeToggle";
 
 const NAV_ITEMS = [
   { to: "/", label: "首页" },
@@ -44,6 +45,7 @@ export default function Header() {
 
         {/* Right side */}
         <div className="hidden md:flex items-center gap-3">
+          <ThemeToggle />
           <Link to="/user" className="w-10 h-10 brutal-border rounded-full brutal-shadow flex items-center justify-center hover:bg-brutal-black/5 transition-colors">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />

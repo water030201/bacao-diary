@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import DiaryCard from "../components/diary/DiaryCard";
 import BrutalButton from "../components/ui/BrutalButton";
 import BrutalInput from "../components/ui/BrutalInput";
+import GrassPullField from "../components/ui/GrassPullField";
 import { getDiaries } from "../lib/storage";
 import { CATEGORIES } from "../types";
 import type { ProductCategory } from "../types";
@@ -117,13 +118,7 @@ export default function DiaryListPage() {
 
       {/* Results */}
       {filtered.length === 0 ? (
-        <div className="text-center py-16">
-          <p className="text-6xl mb-4">🔍</p>
-          <p className="text-xl font-bold text-brutal-black/50">没有找到相关日记</p>
-          <Link to="/diary/new" className="inline-block mt-4">
-            <BrutalButton variant="dark">写第一篇 ✍️</BrutalButton>
-          </Link>
-        </div>
+        <GrassPullField />
       ) : (
         <>
           <p className="text-sm text-brutal-black/50 mb-4 font-bold">共 {filtered.length} 篇日记</p>

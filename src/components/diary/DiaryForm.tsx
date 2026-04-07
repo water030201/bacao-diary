@@ -6,6 +6,7 @@ import EmojiRating from "../ui/EmojiRating";
 import { CATEGORIES } from "../../types";
 import type { Diary, ProductCategory } from "../../types";
 import { saveDiary } from "../../lib/storage";
+import { triggerGrassBurst } from "../../lib/grassBurst";
 
 interface Props {
   initial?: Diary;
@@ -42,7 +43,9 @@ export default function DiaryForm({ initial }: Props) {
     };
 
     saveDiary(diary);
-    navigate(`/diary/${diary.id}`);
+    // 庆祝拔草：从屏幕中心爆发 60 片草叶 + 略延迟跳转让动画露脸
+    triggerGrassBurst(window.innerWidth / 2, window.innerHeight / 2, 60);
+    setTimeout(() => navigate(`/diary/${diary.id}`), 600);
   }
 
   return (
