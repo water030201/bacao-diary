@@ -24,6 +24,39 @@ export default function ThreeBackground({ className = "absolute inset-0" }: Prop
     const isSmall = window.innerWidth < 768;
     if (reduceMotion) return;
 
+    // iOS Safari / 旧设备 webgl 检测 — 不可用就静默退出
+    try {
+      const probe = document.createElement("canvas");
+      const gl = probe.getContext("webgl") || probe.getContext("experimental-webgl");
+      if (!gl) {
+        console.info("[ThreeBackground] WebGL 不可用，跳过 3D 装饰");
+        return;
+      }
+    } catch {
+      return;
+    }
+
+    // 缺失 ResizeObserver（iOS < 13.4）也直接降级
+    if (typeof ResizeObserver === "undefined") {
+      console.info("[ThreeBackground] ResizeObserver 缺失，跳过 3D 装饰");
+      return;
+    }
+
+    let cleanup: (() => void) | null = null;
+    try {
+      cleanup = setupScene(el, isSmall);
+    } catch (err) {
+      console.warn("[ThreeBackground] three.js 初始化失败，已降级：", err);
+      return;
+    }
+    return cleanup ?? undefined;
+  }, []);
+
+  return <div ref={containerRef} aria-hidden className={`pointer-events-none ${className}`} />;
+}
+
+/** three.js 场景初始化 — 抽出来便于 try/catch 包裹 */
+function setupScene(el: HTMLDivElement, isSmall: boolean): () => void {
     const width = el.clientWidth;
     const height = el.clientHeight;
 
@@ -80,13 +113,23 @@ export default function ThreeBackground({ className = "absolute inset-0" }: Prop
     const ico2 = new THREE.LineSegments(ico2Edges, ico2Mat);
     scene.add(ico2);
 
-    // 鼠标视差
-    const mouse = { x: 0, y: 0 };
+    // 视差输入：鼠标 + 触摸（手机可拖动）
+    const input = { x: 0, y: 0, hasUserInput: false };
     const onMouse = (e: MouseEvent) => {
-      mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
-      mouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+      input.x = (e.clientX / window.innerWidth) * 2 - 1;
+      input.y = -(e.clientY / window.innerHeight) * 2 + 1;
+      input.hasUserInput = true;
+    };
+    const onTouch = (e: TouchEvent) => {
+      const touch = e.touches[0];
+      if (!touch) return;
+      input.x = (touch.clientX / window.innerWidth) * 2 - 1;
+      input.y = -(touch.clientY / window.innerHeight) * 2 + 1;
+      input.hasUserInput = true;
     };
     window.addEventListener("mousemove", onMouse);
+    window.addEventListener("touchmove", onTouch, { passive: true });
+    window.addEventListener("touchstart", onTouch, { passive: true });
 
     // 自适应
     const onResize = () => {
@@ -113,9 +156,17 @@ export default function ThreeBackground({ className = "absolute inset-0" }: Prop
       particles.rotation.y = t * 0.04;
       particles.rotation.x = Math.sin(t * 0.15) * 0.1;
 
-      // 相机视差
-      camera.position.x += (mouse.x * 0.6 - camera.position.x) * 0.04;
-      camera.position.y += (mouse.y * 0.4 - camera.position.y) * 0.04;
+      // 自动巡航基线 — Lissajous 曲线，让相机始终缓慢漂移
+      // 即使用户没有输入也能看到视差变化
+      const autoX = Math.sin(t * 0.35) * 0.7;
+      const autoY = Math.cos(t * 0.25) * 0.5;
+
+      // 用户交互（鼠标/触摸）叠加到自动基线上 — 手机可拖动
+      const targetX = input.hasUserInput ? input.x * 0.9 + autoX * 0.4 : autoX;
+      const targetY = input.hasUserInput ? input.y * 0.6 + autoY * 0.4 : autoY;
+
+      camera.position.x += (targetX - camera.position.x) * 0.05;
+      camera.position.y += (targetY - camera.position.y) * 0.05;
       camera.lookAt(0, 0, 0);
 
       renderer.render(scene, camera);
@@ -127,6 +178,8 @@ export default function ThreeBackground({ className = "absolute inset-0" }: Prop
       cancelAnimationFrame(raf);
       ro.disconnect();
       window.removeEventListener("mousemove", onMouse);
+      window.removeEventListener("touchmove", onTouch);
+      window.removeEventListener("touchstart", onTouch);
       renderer.dispose();
       particleGeo.dispose();
       particleMat.dispose();
@@ -140,7 +193,4 @@ export default function ThreeBackground({ className = "absolute inset-0" }: Prop
         el.removeChild(renderer.domElement);
       }
     };
-  }, []);
-
-  return <div ref={containerRef} aria-hidden className={`pointer-events-none ${className}`} />;
 }

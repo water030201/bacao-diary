@@ -80,3 +80,20 @@ html.dark .shadow-\[2px_2px_0_\#1A1A1A\] { box-shadow: 2px 2px 0 #00FF66 !import
   from { clip-path: circle(0% at var(--cx, 50%) var(--cy, 50%)); }
   to   { clip-path: circle(150% at var(--cx, 50%) var(--cy, 50%)); }
 }
+
+/* === 暗色模式探照灯 ===
+   亮色下完全隐藏，暗色下显示一个跟随鼠标的圆形透明洞遮罩 */
+.dark-spotlight {
+  display: none;
+}
+html.dark .dark-spotlight {
+  display: block;
+  background: radial-gradient(
+    circle 240px at var(--spot-x, 50%) var(--spot-y, 50%),
+    transparent 0%,
+    transparent 25%,
+    rgba(0, 0, 0, 0.55) 65%,
+    rgba(0, 0, 0, 0.82) 100%
+  );
+  transition: background 80ms linear;
+}

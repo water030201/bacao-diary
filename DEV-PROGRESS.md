@@ -1,7 +1,49 @@
 # 拔草日记 — 开发进度文档
 
-> 最后更新：2026-04-07
-> 状态：**前端 + 视觉增强 + 主题化拔草特效 + 关灯主题 + Supabase 云端数据全部完成**
+> 最后更新：2026-04-07（晚）
+> 状态：**前端 + 视觉增强 + 主题化拔草特效 + 关灯主题 + Supabase 云端数据 + 移动端兼容修复 全部完成**
+
+## 🔖 存档点 · 2026-04-07 晚（下次对话从这里继续）
+
+### ✅ 本次会话已完成
+- [x] Phase A：修复部署，从 Vercel 迁到 GitHub Pages（HashRouter）
+- [x] Phase B：5 项交互增强（CustomCursor / ⌘K / ScrollProgress / ScrollReveal / StatsPage / three.js）
+- [x] 关灯主题（clip-path 圆形扩散转场 + localStorage 持久化）
+- [x] 主题化拔草特效（GrassBurst + GrassPullField + 写日记成功庆祝）
+- [x] Supabase 云端集成（BaaS + Offline-First 三级数据流 + 哨兵 flag 防种子复活）
+- [x] 暗色模式所有 bug 修复（Footer 变白 / 文字不可见 / 全部 6 个透明度变体）
+- [x] 手机端关灯按钮可见性修复
+- [x] iOS Safari 白屏修复（three.js 三层防御）
+- [x] 手机端 three.js 视差增强（触摸 + Lissajous 自动巡航）
+- [x] 暗色模式探照灯（Radial Spotlight）—— CSS radial-gradient + rAF 节流
+- [x] 完整问题日志写入 `Supabase答疑与架构定位.md`（13 个问题 + 答辩 Q&A 模板）
+- [x] 答辩用技术架构与创新点文档 `docs/技术架构与创新点.md`
+- [x] commit + push 到 GitHub main（commit `1740ff3`）
+
+### 🚧 待办（下次会话从这里开始）
+1. **迁移托管到腾讯云 EdgeOne Pages** ⚠️ 高优先
+   - 原因：github.io 在国内移动 5G 被间歇性阻断
+   - 路径：注册 → 关联 GitHub → 配置 Vite 构建 → 配置 Supabase env vars → 部署
+   - 5-10 分钟可完成
+   - **不需要改任何代码**
+2. 毕业论文撰写（≥8000字）
+3. 答辩 PPT
+4. 演示视频（3-5 分钟）
+
+### 📁 关键文件速查
+| 文件 | 作用 |
+|---|---|
+| `Supabase答疑与架构定位.md` | 项目根，含 13 个问题日志 + 答辩 Q&A |
+| `docs/技术架构与创新点.md` | 答辩 / 论文用，含架构图 + 术语对照 |
+| `docs/SUPABASE-SETUP.md` | Supabase 配置 6 步指南 |
+| `docs/supabase-schema.sql` | 一键建库 SQL |
+| `.env.local` | Supabase URL + key（已 gitignore） |
+
+### 🔗 当前线上地址
+- **GitHub Pages（电脑可用，手机 5G 不稳）**：https://water030201.github.io/bacao-diary/
+- **GitHub 仓库**：https://github.com/water030201/bacao-diary
+
+---
 
 ## 📦 2026-04-07 增强日志（应对导师"做复杂、写复杂"的反馈）
 

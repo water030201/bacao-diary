@@ -43,7 +43,7 @@ export default function Header() {
           })}
         </nav>
 
-        {/* Right side */}
+        {/* Right side - desktop */}
         <div className="hidden md:flex items-center gap-3">
           <ThemeToggle />
           <Link to="/user" className="w-10 h-10 brutal-border rounded-full brutal-shadow flex items-center justify-center hover:bg-brutal-black/5 transition-colors">
@@ -59,13 +59,16 @@ export default function Header() {
           </Link>
         </div>
 
-        {/* Mobile hamburger */}
-        <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden text-2xl font-black cursor-pointer"
-        >
-          {menuOpen ? "✕" : "☰"}
-        </button>
+        {/* Mobile right side - 主题切换 + hamburger 永远可见 */}
+        <div className="md:hidden flex items-center gap-3">
+          <ThemeToggle />
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="text-2xl font-black cursor-pointer"
+          >
+            {menuOpen ? "✕" : "☰"}
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu */}
