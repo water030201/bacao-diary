@@ -4,7 +4,7 @@ import BrutalButton from "../components/ui/BrutalButton";
 import { useSpeech } from "../hooks/useSpeech";
 
 export default function VoiceGuidePage() {
-  const { transcript, isListening, isSupported, start, stop, reset } = useSpeech();
+  const { transcript, isListening, isSupported, error, start, stop, reset } = useSpeech();
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
@@ -35,6 +35,11 @@ export default function VoiceGuidePage() {
             <p className="font-bold mb-4">
               {isListening ? "🔴 正在聆听... 说点什么吧" : "点击麦克风开始语音输入"}
             </p>
+            {error && (
+              <div className="brutal-border bg-danger/10 text-danger p-3 mb-4 font-bold text-sm">
+                ⚠️ {error}
+              </div>
+            )}
             <div className="brutal-border bg-brutal-white p-4 min-h-[100px] text-left mb-4">
               <p className={transcript ? "text-brutal-black" : "text-brutal-black/30"}>
                 {transcript || "语音识别内容会显示在这里..."}

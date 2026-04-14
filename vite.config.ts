@@ -5,4 +5,7 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   base: "/bacao-diary/",
   plugins: [react(), tailwindcss()],
+  server: {
+    host: true,
+  },
 });
