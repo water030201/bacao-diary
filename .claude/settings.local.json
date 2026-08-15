@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cmd.exe /c \"where node && where npm\"cd \"C:\\\\Users\\\\15507\\\\Desktop\\\\小饼🍪拔草计划\"\rnpm create vite@latest . -- --template react)"
+    ]
+  }
+}
